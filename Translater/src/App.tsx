@@ -1,11 +1,40 @@
 import { useState } from "react";
+import { ApiRequest } from "./api/api";
 
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState<number>(0);
-  const [wordList, setWordList] = useState<string[]>([]);
+  interface translateList {
+    untranslateWord: string;
+    translatedWord: string;
+  }
+  const [wordList, setWordList] = useState<translateList[]>([]);
   const [word, setWord] = useState<string>("");
+
+  const translateAndDisplayListToTable = async (word: string) => {
+    const translateUrl =
+      "https://api.edenai.run/v2/translation/automatic_translation";
+    const data = {
+      providers: "amazon,google,ibm,microsoft",
+      text: word,
+      source_language: "en",
+      target_language: "zh",
+      fallback_providers: "",
+    };
+
+    const res = await ApiRequest("post", translateUrl, data);
+    console.log();
+
+    setWordList([
+      ...wordList,
+      {
+        untranslateWord: word,
+        translatedWord: res.data.amazon.text,
+      },
+    ]);
+    setWord(" ");
+  };
 
   return (
     <>
@@ -34,8 +63,7 @@ function App() {
         </label>
         <button
           onClick={() => {
-            setWordList([...wordList, word]);
-            setWord(" ");
+            translateAndDisplayListToTable(word);
           }}
         >
           Add
@@ -51,9 +79,14 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {wordList.map((item) => (
-              <tr key={item}>
-                <td className="border border-black px-4 py-2">{item}</td>
+            {wordList.map((word) => (
+              <tr key={word.untranslateWord}>
+                <td className="border border-black px-4 py-2">
+                  {word.untranslateWord}
+                </td>
+                <td className="border border-black px-4 py-2">
+                  {word.translatedWord}
+                </td>
               </tr>
             ))}
           </tbody>
