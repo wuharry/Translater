@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ApiRequest } from "./api/api";
 import { TranslateResponse } from "./types/ApiRespone";
 import { SpeakerWave, Recycle } from "./icons";
@@ -49,6 +49,18 @@ function App() {
     setWord(" ");
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setWordList([
+        ...wordList,
+        {
+          untranslateWord: word,
+          translatedWord: "",
+        },
+      ]);
+    }
+  };
+
   return (
     <div className=" w-full h-screen flex flex-col justify-center items-center">
       <h1>英文單字翻譯朗讀</h1>
@@ -68,6 +80,7 @@ function App() {
               setWord(e.target.value);
             }}
             value={word}
+            onKeyDown={handleKeyDown}
             className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
           />
         </label>
@@ -99,7 +112,9 @@ function App() {
                 <td className="px-6 py-4">
                   <div className="flex flex-row items-center justify-around">
                     {word.translatedWord}
-                    <Recycle />
+                    <button>
+                      <Recycle />
+                    </button>
                   </div>
                 </td>
                 <td className="px-6 py-4 flex justify-center items-center">
