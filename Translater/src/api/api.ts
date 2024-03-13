@@ -59,24 +59,24 @@ instance.interceptors.response.use(
   }
 );
 
-export const ApiRequest = (
+export const ApiRequest = <T>(
   method: string,
   url: string,
   data: string | object | undefined | null,
   config: AxiosRequestConfig = {}
-): Promise<AxiosResponse> | false => {
+): Promise<T> | false => {
   method = method.toLowerCase();
   switch (method) {
     case "post":
-      return instance.post(url, data, config);
+      return instance.post(url, data, config).then((res) => res.data);
     case "get":
-      return instance.get(url, { params: data });
+      return instance.get(url, { params: data }).then((res) => res.data);
     case "delete":
-      return instance.delete(url, { params: data });
+      return instance.delete(url, { params: data }).then((res) => res.data);
     case "put":
-      return instance.put(url, data);
+      return instance.put(url, data).then((res) => res.data);
     case "patch":
-      return instance.patch(url, data);
+      return instance.patch(url, data).then((res) => res.data);
     default:
       console.log(`未知的 method: ${method}`);
       return false;
