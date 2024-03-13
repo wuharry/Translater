@@ -99,7 +99,7 @@ function App() {
             <tr>
               <th className="px-6 py-3">Word</th>
               <th className="px-6 py-3">中文</th>
-              <th className="px-6 py-3">發音</th>
+              <th className="px-6 py-3">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -112,13 +112,16 @@ function App() {
                 <td className="px-6 py-4">
                   <div className="flex flex-row items-center justify-around">
                     {word.translatedWord}
-                    <button>
-                      <Recycle />
-                    </button>
                   </div>
                 </td>
-                <td className="px-6 py-4 flex justify-center items-center">
-                  <SpeakerWave />
+                <td className="px-6 py-4 flex items-center justify-around">
+                  <button>
+                    <SpeakerWave />
+                  </button>
+
+                  <button>
+                    <Recycle />
+                  </button>
                 </td>
               </tr>
             ))}
