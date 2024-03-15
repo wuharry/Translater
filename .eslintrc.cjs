@@ -27,8 +27,6 @@ module.exports = {
     "postcss.config.js",
     "tailwind.config.js"
   ],
-  react: {
-    "version": "detect"  // Auto-detect React version
-  }
+
 
 };
