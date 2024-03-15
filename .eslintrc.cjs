@@ -18,7 +18,17 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: "./tsconfig.json",
   },
   plugins: ["react"],
   rules: {},
+  ignorePatterns: [
+    ".eslintrc.cjs",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ],
+  react: {
+    "version": "detect"  // Auto-detect React version
+  }
+
 };
