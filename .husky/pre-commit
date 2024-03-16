@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# 執行您的測試（如果適用）
 npm test
+
+# 執行 Commitlint 檢查
+npx commitlint --edit

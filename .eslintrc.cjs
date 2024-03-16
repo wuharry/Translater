@@ -21,7 +21,9 @@ module.exports = {
     project: "./tsconfig.json",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "indent": ["error", 4] 
+  },
   ignorePatterns: [
     ".eslintrc.cjs",
     "postcss.config.js",
