@@ -23,7 +23,7 @@ instance.interceptors.request.use(
   function (error) {
     // Do something with request error
     return Promise.reject(error);
-  }
+  },
 );
 
 instance.interceptors.response.use(
@@ -56,14 +56,14 @@ instance.interceptors.response.use(
       }
       return Promise.reject(error);
     }
-  }
+  },
 );
 
 export const ApiRequest = <T>(
   method: string,
   url: string,
   data: string | object | undefined | null,
-  config: AxiosRequestConfig = {}
+  config: AxiosRequestConfig = {},
 ): Promise<T> | false => {
   method = method.toLowerCase();
   switch (method) {
