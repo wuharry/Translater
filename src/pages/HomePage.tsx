@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { ApiRequest } from "../api/api";
-import { TranslateResponse } from "../types/ApiRespone";
+import { translateList, TranslateResponse } from "../types";
 import { useNavigate } from "react-router-dom";
 import { SpeakerWave, Recycle } from "../icons";
 import "../App.css";
@@ -9,10 +9,7 @@ import { fakeWordList } from "../fakeData/wordList";
 export const HomePage: FunctionComponent = () => {
   const navigate = useNavigate();
   const [count, setCount] = useState<number>(0);
-  interface translateList {
-    untranslateWord: string;
-    translatedWord: string;
-  }
+
   const [wordList, setWordList] = useState<translateList[]>([]);
   const [word, setWord] = useState<string>("");
 
@@ -64,8 +61,8 @@ export const HomePage: FunctionComponent = () => {
     }
   };
 
-  const startExamHandler = () => {
-    navigate("/test");
+  const startExamHandler = (data: translateList[]) => {
+    navigate("/test", { state: data });
   };
   return (
     <div className=" w-full h-screen flex flex-col justify-center items-center">
@@ -136,7 +133,7 @@ export const HomePage: FunctionComponent = () => {
         <button
           className=" m-10"
           onClick={() => {
-            startExamHandler();
+            startExamHandler(wordList);
           }}
         >
           Star Test
