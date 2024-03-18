@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["standard-with-typescript", "plugin:react/recommended"],
+  extends: [
+    "standard-with-typescript",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+  ],
   overrides: [
     {
       env: {
@@ -22,13 +27,7 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "indent": ["error", 4] 
+    indent: ["error", 4],
   },
-  ignorePatterns: [
-    ".eslintrc.cjs",
-    "postcss.config.js",
-    "tailwind.config.js"
-  ],
-
-
+  ignorePatterns: [".eslintrc.cjs", "postcss.config.js", "tailwind.config.js"],
 };
