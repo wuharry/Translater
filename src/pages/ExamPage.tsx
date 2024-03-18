@@ -10,13 +10,14 @@ export const ExamPage: FunctionComponent<TestProps> = () => {
   const data = location.state;
   useEffect(() => {
     console.log("passData", data);
-    const shuffledList = shuffleWordList(data);
-    setWordList(shuffledList);
+    if (Array.isArray(data)) {
+      const shuffledList = shuffleWordList(data);
+      setWordList(shuffledList);
+    }
   }, [data]);
 
-  const shuffleWordList = (data: []) => {
+  const shuffleWordList = (data: translateList[]) => {
     const shuffledList = [...data];
-
     for (let index = shuffledList.length - 1; index > 0; index--) {
       let swapIndex = Math.floor(Math.random() * (index + 1));
       [shuffledList[index], shuffledList[swapIndex]] = [
