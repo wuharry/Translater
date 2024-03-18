@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { ApiRequest } from "./api/api";
-import { TranslateResponse } from "./types/ApiRespone";
-import { SpeakerWave, Recycle } from "./icons";
-import "./App.css";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { ApiRequest } from "../api/api";
+import { TranslateResponse } from "../types/ApiRespone";
+import { useNavigate } from "react-router-dom";
+import { SpeakerWave, Recycle } from "../icons";
+import "../App.css";
+import { fakeWordList } from "../fakeData/wordList";
 
-import { fakeWordList } from "./fakeData/wordList";
-
-function App() {
+export const HomePage: FunctionComponent = () => {
+  const navigate = useNavigate();
   const [count, setCount] = useState<number>(0);
   interface translateList {
     untranslateWord: string;
@@ -63,6 +64,9 @@ function App() {
     }
   };
 
+  const startExamHandler = () => {
+    navigate("/test");
+  };
   return (
     <div className=" w-full h-screen flex flex-col justify-center items-center">
       <h1>英文單字翻譯朗讀</h1>
@@ -129,12 +133,15 @@ function App() {
             ))}
           </tbody>
         </table>
-        <button className=" m-10" onClick={() => {}}>
+        <button
+          className=" m-10"
+          onClick={() => {
+            startExamHandler();
+          }}
+        >
           Star Test
         </button>
       </div>
     </div>
   );
-}
-
-export default App;
+};
